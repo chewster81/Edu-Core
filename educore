@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduSpark | Learn Online</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="logo">EduSpark</div>
+        <ul class="nav-links">
+            <li><a href="#">Home</a></li>
+            <li><a href="#courses">Courses</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#" class="btn-login">Login</a></li>
+        </ul>
+        <div class="menu-toggle" id="mobile-menu">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="hero-content">
+            <h1>Unlock Your Potential</h1>
+            <p>Master new skills with our expert-led courses. Start learning today.</p>
+            <button class="cta-button">Explore Courses</button>
+        </div>
+    </header>
+
+    <section id="courses" class="container">
+        <h2>Popular Courses</h2>
+        <div class="course-grid" id="course-list">
+            </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 EduSpark. All rights reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #f4f4f9;
+    color: #333;
+}
+
+/* Navbar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background-color: #ffffff;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #4a90e2;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+}
+
+.btn-login {
+    background-color: #4a90e2;
+    color: white !important;
+    padding: 8px 16px;
+    border-radius: 5px;
+    transition: background 0.3s;
+}
+
+.btn-login:hover {
+    background-color: #357abd;
+}
+
+/* Hero Section */
+.hero {
+    background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1501504905252-473c47e087f8?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+    background-size: cover;
+    background-position: center;
+    height: 60vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
+}
+
+.hero h1 { font-size: 3rem; margin-bottom: 1rem; }
+.hero p { font-size: 1.2rem; margin-bottom: 2rem; }
+
+.cta-button {
+    padding: 12px 30px;
+    background-color: #e24a4a;
+    color: white;
+    border: none;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+/* Course Grid */
+.container {
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+h2 { text-align: center; margin-bottom: 2rem; }
+
+.course-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.course-card {
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    transition: transform 0.2s;
+}
+
+.course-card:hover { transform: translateY(-5px); }
+
+.course-image {
+    width: 100%;
+    height: 180px;
+    background-color: #ddd;
+    object-fit: cover;
+}
+
+.course-info { padding: 1.5rem; }
+.course-category { color: #888; font-size: 0.9rem; }
+.course-title { margin: 10px 0; font-size: 1.25rem; }
+.course-btn {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background-color: #4a90e2;
+    color: white;
+    border: none;
+    margin-top: 15px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 2rem;
+    background-color: #333;
+    color: white;
+    margin-top: 3rem;
+}// Mock Database of Courses
+const courses = [
+    {
+        title: "Introduction to Python",
+        category: "Programming",
+        image: "https://images.unsplash.com/photo-1526379095098-d400fd0bf935?auto=format&fit=crop&w=500&q=60",
+        description: "Learn the basics of Python programming from scratch."
+    },
+    {
+        title: "Digital Marketing Masterclass",
+        category: "Marketing",
+        image: "https://images.unsplash.com/photo-1432888498266-38ffec3eaf0a?auto=format&fit=crop&w=500&q=60",
+        description: "Master SEO, Social Media, and Content Marketing strategies."
+    },
+    {
+        title: "Data Science Fundamentals",
+        category: "Data Science",
+        image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=500&q=60",
+        description: "Analyze data and build predictive models using real datasets."
+    }
+];
+
+// Function to render courses
+function loadCourses() {
+    const courseList = document.getElementById('course-list');
+    
+    courses.forEach(course => {
+        const card = document.createElement('div');
+        card.className = 'course-card';
+        
+        card.innerHTML = `
+            <img src="${course.image}" alt="${course.title}" class="course-image">
+            <div class="course-info">
+                <span class="course-category">${course.category}</span>
+                <h3 class="course-title">${course.title}</h3>
+                <p>${course.description}</p>
+                <button class="course-btn" onclick="enroll('${course.title}')">Enroll Now</button>
+            </div>
+        `;
+        
+        courseList.appendChild(card);
+    });
+}
+
+// Simple interaction
+function enroll(courseTitle) {
+    alert(`You have successfully enrolled in: ${courseTitle}`);
+}
+
+// Load courses when page is ready
+document.addEventListener('DOMContentLoaded', loadCourses);
